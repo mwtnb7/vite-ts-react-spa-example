@@ -74,7 +74,7 @@ export interface PropertyData {
 }
 
 export interface SimulationFormData {
-	propertyId: string;
+	propertyId: number;
 	roomType: string;
 	mealPlan: string;
 	contractYears: string;
