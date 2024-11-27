@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Header from "./layouts/Header";
 import PageHeader from "./layouts/PageHeader";
 import Footer from "./layouts/Footer";
@@ -13,22 +12,11 @@ import { PropertyProvider } from "./contexts/PropertyProvider";
 import { FormProvider } from "./contexts/FormProvider";
 
 const App: React.FC = () => {
-	const location = useLocation();
-	const navigate = useNavigate();
 	const FRONT_URL = import.meta.env.VITE_FRONT_URL;
 
-	useEffect(() => {
-		const searchParams = new URLSearchParams(location.search);
-		const propertyId = searchParams.get("id");
-
-		if (!propertyId) {
-			navigate(`${FRONT_URL}/`, { replace: true });
-		}
-	}, [location.search]);
-
 	return (
-		<PropertyProvider>
-			<FormProvider>
+		<FormProvider>
+			<PropertyProvider>
 				<div className="l-root-container">
 					<Header />
 					<PageHeader />
@@ -65,8 +53,8 @@ const App: React.FC = () => {
 					</section>
 					<Footer />
 				</div>
-			</FormProvider>
-		</PropertyProvider>
+			</PropertyProvider>
+		</FormProvider>
 	);
 };
 

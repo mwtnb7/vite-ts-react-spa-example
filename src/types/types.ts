@@ -9,6 +9,7 @@ export interface PropertyData {
 	gender?: string;
 	category?: string;
 	feature_labels?: Array<string>;
+	meal_type_labels?: Array<"1" | "2" | "3">;
 	acf: {
 		p_kind?: string;
 		p_name?: string;
@@ -17,6 +18,7 @@ export interface PropertyData {
 		p_menseki?: string;
 		p_kozo?: string;
 		p_capacity?: string;
+		p_no_meal?: boolean;
 		p_open?: string;
 		p_bus_time?: string;
 		p_meal_time?: string;
@@ -76,8 +78,8 @@ export interface PropertyData {
 export interface SimulationFormData {
 	propertyId: number;
 	roomType: string;
-	mealPlan: string;
-	contractYears: string;
+	mealPlan: number;
+	contractYears: number;
 	fullName: string;
 	email: string;
 	phone: string;

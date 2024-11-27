@@ -16,7 +16,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep, totalSteps }
 				{Array.from({ length: totalSteps }, (_, index) => (
 					<span
 						key={index}
-						className={`c-forms__step-progress-dot ${index < currentStep ? "is-active" : ""}`}></span>
+						className={`c-forms__step-progress-dot ${index === currentStep - 1 ? "is-active" : ""}`}></span>
 				))}
 			</div>
 		</div>

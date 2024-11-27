@@ -1,7 +1,95 @@
+/* UI */
 .c-button:disabled {
 	background-color: #ccc;
 	color: #666;
 	border-color: #ccc;
 	cursor: not-allowed;
 	opacity: 0.7;
+}
+
+/* Steps */
+
+.c-forms__propety-labels {
+	flex-wrap: wrap;
+}
+
+.c-forms__select-property-selected {
+	display: block !important;
+}
+
+.c-forms__select-property-selected.is-card {
+	display: block;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@media screen and (max-width: 46.8125em) {
+	.c-modal-inner {
+		margin: 0 -0.5rem;
+	}
+}
+
+@media screen and (max-width: 46.8125em) {
+	.c-property-modal-inner {
+		padding-bottom: 2rem;
+	}
+}
+
+.c-property-modal-inner .c-forms__select-property-selected.is-card {
+	margin-top: 0;
+}
+
+.c-forms__select-property-selected.is-card .c-forms__propety-title {
+	font-size: 1.1rem;
+}
+
+@media screen and (max-width: 46.8125em) {
+	.c-forms__select-property-selected.is-card .c-forms__propety-title {
+		font-size: 0.9rem;
+	}
+}
+
+.c-heading.is-sm.is-modal {
+	margin-bottom: 0.45em;
+}
+
+@media screen and (max-width: 46.8125em) {
+	.c-heading.is-sm.is-modal {
+		margin-bottom: 0.5em;
+	}
+}
+
+.c-forms__select-property-selected.is-card .c-label {
+	font-size: 0.675rem;
+}
+
+@media screen and (max-width: 46.8125em) {
+	.c-forms__select-property-selected.is-card .c-label {
+		font-size: 0.5rem;
+	}
+}
+
+.c-forms__select-property-selected.is-card:hover {
+	opacity: 0.8;
+}
+
+/* ReactModal */
+
+.ReactModal__Body--open {
+	overflow: hidden;
+}
+
+.ReactModal__Overlay {
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+	opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+	opacity: 0;
 }

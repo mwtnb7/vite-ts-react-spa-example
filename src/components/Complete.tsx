@@ -5,22 +5,20 @@ import { useProperty } from "../contexts/PropertyProvider";
 
 const Complete: React.FC = () => {
 	const navigate = useNavigate();
-	const { setProperty, setPropertyId } = useProperty(); // property をクリアする関数を取得
+	const { setProperty } = useProperty();
 	const { formData } = useForm();
+	const FRONT_URL = import.meta.env.VITE_FRONT_URL || "";
 
 	useEffect(() => {
 		setProperty(null);
-		setPropertyId(null);
-
-		console.log(formData);
 
 		if (
 			!formData ||
 			Object.entries(formData).every(([key, value]) => key === "propertyId" || value === "" || value === 0)
 		) {
-			navigate(`${import.meta.env.VITE_FRONT_URL}/`, { replace: true });
+			navigate(`${FRONT_URL}/`, { replace: true });
 		}
-	}, []);
+	}, [formData, navigate, setProperty, FRONT_URL]);
 
 	return (
 		<>
@@ -38,10 +36,10 @@ const Complete: React.FC = () => {
 						<br />
 					</div>
 				</div>
-				<div className="c-forms__pagetop  u-text-center">
+				<div className="c-forms__pagetop u-text-center">
 					<a
 						className="c-button"
-						href="/">
+						href={`${FRONT_URL}/`}>
 						トップページに戻る
 					</a>
 				</div>

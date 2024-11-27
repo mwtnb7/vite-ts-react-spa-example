@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "../contexts/FormProvider";
+import { useProperty } from "../contexts/PropertyProvider";
+import usePropertyIdFromUrl from "../hooks/usePropertyIdFromUrl";
 import StepIndicator from "./StepIndicator";
 import FormFooter from "./FormFooter";
 import ErrorMessage from "./ErrorMessage";
@@ -8,12 +10,11 @@ import ErrorMessage from "./ErrorMessage";
 const Step4: React.FC = () => {
 	const { formData, updateFormData, setFormError } = useForm();
 	const [selectedYears, setSelectedYears] = useState<number | null>(
-		formData.contractYears ? parseInt(formData.contractYears) : null
+		formData.contractYears ? Number(formData.contractYears) : null
 	);
 	const navigate = useNavigate();
-	const location = useLocation();
-	const searchParams = new URLSearchParams(location.search);
-	const propertyId = searchParams.get("id");
+	const { property } = useProperty();
+	const propertyId = usePropertyIdFromUrl();
 	const FRONT_URL = import.meta.env.VITE_FRONT_URL;
 
 	useEffect(() => {
@@ -21,15 +22,18 @@ const Step4: React.FC = () => {
 			setFormError("食事プランを選択してください。");
 			navigate(`${FRONT_URL}/step3/?id=${propertyId}`, { replace: true });
 		}
-	}, [formData.mealPlan]);
+	}, [formData.mealPlan, setFormError, navigate, propertyId, FRONT_URL]);
 
 	const handleContractYearsChange = (years: number) => {
 		setSelectedYears(years);
-		updateFormData("contractYears", years.toString());
+		updateFormData("contractYears", years);
 		setFormError(null);
 
 		navigate(`${FRONT_URL}/step5/?id=${propertyId}`);
 	};
+
+	// Determine selectable years
+	const selectableYears = property?.acf?.p_kind === "マンションタイプ" ? [2] : [1, 2, 3, 4];
 
 	return (
 		<>
@@ -47,7 +51,7 @@ const Step4: React.FC = () => {
 								<div className="c-forms__radio is-design is-border">
 									<span>
 										<span>
-											{Array.from({ length: 4 }, (_, i) => i + 1).map((year) => (
+											{selectableYears.map((year) => (
 												<span key={year}>
 													<label>
 														<input

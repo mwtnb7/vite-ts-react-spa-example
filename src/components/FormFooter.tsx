@@ -26,7 +26,13 @@ const FormFooter: React.FC<FormFooterProps> = ({ step, totalSteps, isNextDisable
 		} else if (step === 2) {
 			navigate(`${FRONT_URL}/${searchParams}`);
 		} else {
-			window.location.href = "/";
+			const referrer = document.referrer;
+
+			if (referrer === "") {
+				window.location.href = "/";
+			} else {
+				window.location.href = referrer;
+			}
 		}
 	};
 
